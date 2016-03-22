@@ -1,0 +1,19 @@
+public abstract class Location 
+{
+   private String locationName;
+   private int capacity = 1;
+
+   protected void setLocationName( String name )
+   {
+      locationName = name;
+   }
+
+   public String getLocationName()
+   {
+      return locationName;
+   }
+
+   public abstract Button getButton();
+
+   public abstract Door getDoor();
+}

@@ -1,0 +1,85 @@
+import java.awt.*;
+import java.awt.geom.*;
+import java.util.*;
+import javax.swing.*;
+
+public class ImagePanel extends JPanel {
+   private int ID;
+   private Point2D.Double position;
+   private ImageIcon imageIcon;
+   private Set panelChildren;
+
+   public ImagePanel( int identifier, String imageName )
+   {
+      super( null );
+      setOpaque( false );
+
+      ID = identifier;
+
+      position = new Point2D.Double( 0, 0 );
+      setLocation( 0, 0 );
+     
+      // it should be changed if problem
+      imageIcon = new ImageIcon( imageName );//getClass().getResource( imageName ) );
+
+      Image image = imageIcon.getImage();
+      setSize( image.getWidth( this ), image.getHeight( this ) );
+
+      panelChildren = new HashSet();
+   }
+
+   public void paintComponent( Graphics g )
+   {
+      super.paintComponent( g );
+      imageIcon.paintIcon( this, g, 0, 0 );
+   }
+
+   public void add( ImagePanel panel )
+   {
+      panelChildren.add( panel );
+      super.add( panel );
+   }
+
+   public void add( ImagePanel panel, int index )
+   {
+      panelChildren.add( panel );
+      super.add( panel, index );
+   }
+
+   public void remove( ImagePanel panel )
+   {
+      panelChildren.remove( panel );
+      super.remove( panel );
+   }
+
+   public void setIcon( ImageIcon icon )
+   {
+      imageIcon = icon;
+   }
+
+   public void setPosition( double x, double y )
+   {
+      position.setLocation( x, y );
+      setLocation( ( int ) x, ( int ) y );
+   }
+
+   public int getID()
+   {
+      return ID;
+   }
+
+   public Point2D.Double getPosition()
+   {
+      return position;
+   }
+
+   public ImageIcon getImageIcon()
+   {
+      return imageIcon;
+   }
+
+   public Set getChildren()
+   {
+      return panelChildren;
+   }
+}
